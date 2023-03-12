@@ -9,6 +9,15 @@ import SwiftUI
 
 struct FindView: View {
     @StateObject private var vm = FindViewModel()
+    @State var image = Image("plaseholderIMG")
+    
+    private func shareImage() -> Image {
+        guard let currentIndex = vm.index else {
+            return Image("plaseholderIMG")
+        }
+        return Image(vm.images[currentIndex])
+    }
+    
     var body: some View {
         VStack {
             Text("LikeThePhoto")
@@ -24,18 +33,27 @@ struct FindView: View {
             HStack() {
                 ButtonView(titel: "star", color: .green, action: {})
                 Spacer()
-                ButtonView(titel: "square.and.arrow.up", color: .blue, action: {})
+                ShareLink(
+                    item: shareImage(),
+                    preview: SharePreview(
+                        "LikeThePhoto",
+                        image: shareImage()
+                    )
+                ) {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(.black)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.blue)
+                        .cornerRadius(20)
+                }
+                
                 Spacer()
                 ButtonView(titel: "arrowshape.right", color: .orange, action: vm.nextImage)
             }
             .disabled(vm.images.isEmpty)
         }
         .padding()
-    }
-    
-    @ViewBuilder
-    func showImageCard(_ image: String? = nil) -> some View {
-        ImageCardView(image: image)
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -14,27 +15,52 @@ class NetworkManager {
     
     init() {}
     
-    func fetchImage(_ query: String? = nil) -> ImageModel? {
-        var image: ImageModel?
+    func fetchImageModel(_ query: String, completion: @escaping([ImageModel]) -> Void) {
+        print("im fetch sttart")
+        var imageModels: [ImageModel] = []
         var urlString = url + accessKey
-        if let query = query {
+        if !query.isEmpty {
             urlString += "&query=" + query
         }
         
-        guard let url = URL(string: urlString) else { return nil }
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        for _ in 0...1 {
+            URLSession.shared.dataTask(with: url) { data, _, error in
+                guard let data = data, error == nil else {
+                    print("Error fetchig image model: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                
+                if let decodeImage = try? JSONDecoder().decode(ImageModel.self, from: data) {
+                    DispatchQueue.main.async {
+                        print("add")
+                        imageModels.append(decodeImage)
+                    }
+                }
+                
+            }.resume()
+        }
+        completion(imageModels)
+        
+    }
+    
+    func fetchImage(_ url: URL) -> UIImage? {
+        var image: UIImage?
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
                 print("Error fetchig image: \(String(describing: error?.localizedDescription))")
+                
                 return
             }
             
-            if let decodeImage = try? JSONDecoder().decode(ImageModel.self, from: data) {
+            if let fetchImage = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    image = decodeImage
+                    image = fetchImage
                 }
             }
-
         }.resume()
         
         return image
