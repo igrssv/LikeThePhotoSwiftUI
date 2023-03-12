@@ -26,7 +26,11 @@ struct FavoritesView: View {
                     ScrollView {
                         LazyVGrid(columns: grids) {
                             ForEach(vm.images, id: \.self) { image in
-                                ItemFavoritesImageView(image: image)
+                                NavigationLink {
+                                    ImageFullScreenView(image: image)
+                                } label: {
+                                    ItemFavoritesImageView(image: image)
+                                }
                             }
                         }
                     }

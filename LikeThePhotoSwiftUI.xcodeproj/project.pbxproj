@@ -23,6 +23,7 @@
 		8EED1FFB29BE13AA00EBEC70 /* ImageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FF929BE13AA00EBEC70 /* ImageEntity+CoreDataProperties.swift */; };
 		8EED1FFE29BE1F0C00EBEC70 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FFD29BE1F0C00EBEC70 /* FavoritesViewModel.swift */; };
 		8EED200029BE1FCC00EBEC70 /* ItemFavoritesImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FFF29BE1FCC00EBEC70 /* ItemFavoritesImageView.swift */; };
+		8EED200229BE2CE000EBEC70 /* ImageFullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED200129BE2CE000EBEC70 /* ImageFullScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		8EED1FF929BE13AA00EBEC70 /* ImageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8EED1FFD29BE1F0C00EBEC70 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		8EED1FFF29BE1FCC00EBEC70 /* ItemFavoritesImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFavoritesImageView.swift; sourceTree = "<group>"; };
+		8EED200129BE2CE000EBEC70 /* ImageFullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFullScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				8EED1FE229BDAE5900EBEC70 /* FindView.swift */,
 				8EED1FE429BDB55E00EBEC70 /* FavoritesView.swift */,
 				8EED1FFF29BE1FCC00EBEC70 /* ItemFavoritesImageView.swift */,
+				8EED200129BE2CE000EBEC70 /* ImageFullScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				8EED1FFA29BE13AA00EBEC70 /* ImageEntity+CoreDataClass.swift in Sources */,
 				8EED1FFB29BE13AA00EBEC70 /* ImageEntity+CoreDataProperties.swift in Sources */,
 				8EED1FE529BDB55E00EBEC70 /* FavoritesView.swift in Sources */,
+				8EED200229BE2CE000EBEC70 /* ImageFullScreenView.swift in Sources */,
 				8EED1FE029BDA82900EBEC70 /* ImageCardView.swift in Sources */,
 				8EED1FEE29BDBF4600EBEC70 /* FindViewModel.swift in Sources */,
 				8EED1FE329BDAE5900EBEC70 /* FindView.swift in Sources */,
