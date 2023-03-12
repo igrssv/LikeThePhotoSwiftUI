@@ -8,21 +8,34 @@
 import SwiftUI
 
 struct ImageCardView: View {
-    let image: String
+    let image: String?
+    private let size = UIScreen.main.bounds.size
+    
     var body: some View {
         VStack {
-            Image(image)
-                .resizable()
-                .scaledToFit()
+            ZStack {
+                Image(image ?? "plaseholderIMG")
+                    .resizable()
+                    .frame(width: size.width * 0.9, height: size.height * 0.7)
+                    .scaledToFit()
+                    .blur(radius: image != nil ? 0 : 5)
+                if image == nil {
+                    VStack {
+                        Text("Loading...")
+                            .font(.title3)
+                        Text("Check the API key setting")
+                            .font(.caption2)
+                    }
+                }
+            }
         }
         .cornerRadius(20)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .shadow(radius: 10)
     }
 }
 
 struct ImageCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageCardView(image: "demoIMG")
+        ImageCardView(image: nil)
     }
 }

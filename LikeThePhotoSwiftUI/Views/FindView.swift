@@ -8,21 +8,34 @@
 import SwiftUI
 
 struct FindView: View {
+    @StateObject private var vm = FindViewModel()
     var body: some View {
         VStack {
             Text("LikeThePhoto")
                 .font(.largeTitle)
                 .bold()
-            ImageCardView(image: "demoIMG")
-            HStack() {
-                ButtonView(titel: "star", color: .green)
-                Spacer()
-                ButtonView(titel: "square.and.arrow.up", color: .blue)
-                Spacer()
-                ButtonView(titel: "arrowshape.right", color: .orange)
+            Text("\(vm.imageModels.count)")
+            if let index = vm.index {
+                ImageCardView(image: vm.images[index])
+            } else {
+                ImageCardView(image: nil)
             }
+            
+            HStack() {
+                ButtonView(titel: "star", color: .green, action: {})
+                Spacer()
+                ButtonView(titel: "square.and.arrow.up", color: .blue, action: {})
+                Spacer()
+                ButtonView(titel: "arrowshape.right", color: .orange, action: vm.nextImage)
+            }
+            .disabled(vm.images.isEmpty)
         }
         .padding()
+    }
+    
+    @ViewBuilder
+    func showImageCard(_ image: String? = nil) -> some View {
+        ImageCardView(image: image)
     }
 }
 
@@ -35,9 +48,12 @@ struct FindView_Previews: PreviewProvider {
 struct ButtonView: View {
     let titel: String
     let color: Color
+    let action: () -> ()
     var body: some View {
         Button {
-            
+            withAnimation {
+                action()
+            }
         } label: {
             Image(systemName: titel)
                 .foregroundColor(.black)

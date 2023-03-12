@@ -16,6 +16,7 @@
 		8EED1FE529BDB55E00EBEC70 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FE429BDB55E00EBEC70 /* FavoritesView.swift */; };
 		8EED1FEA29BDB6A900EBEC70 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FE929BDB6A900EBEC70 /* NetworkManager.swift */; };
 		8EED1FEC29BDB6F700EBEC70 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FEB29BDB6F700EBEC70 /* ImageModel.swift */; };
+		8EED1FEE29BDBF4600EBEC70 /* FindViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED1FED29BDBF4600EBEC70 /* FindViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		8EED1FE429BDB55E00EBEC70 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		8EED1FE929BDB6A900EBEC70 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8EED1FEB29BDB6F700EBEC70 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		8EED1FED29BDBF4600EBEC70 /* FindViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +63,11 @@
 		8EED1FD029BDA65900EBEC70 /* LikeThePhotoSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				8EED1FD129BDA65900EBEC70 /* LikeThePhotoSwiftUIApp.swift */,
 				8EED1FE829BDB67000EBEC70 /* Services */,
 				8EED1FE729BDB65400EBEC70 /* Models */,
 				8EED1FE629BDB63F00EBEC70 /* ViewModels */,
 				8EED1FE129BDAD2D00EBEC70 /* Views */,
-				8EED1FD129BDA65900EBEC70 /* LikeThePhotoSwiftUIApp.swift */,
 				8EED1FD529BDA65B00EBEC70 /* Assets.xcassets */,
 				8EED1FD729BDA65B00EBEC70 /* Preview Content */,
 			);
@@ -94,6 +96,7 @@
 		8EED1FE629BDB63F00EBEC70 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				8EED1FED29BDBF4600EBEC70 /* FindViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				8EED1FEA29BDB6A900EBEC70 /* NetworkManager.swift in Sources */,
 				8EED1FE529BDB55E00EBEC70 /* FavoritesView.swift in Sources */,
 				8EED1FE029BDA82900EBEC70 /* ImageCardView.swift in Sources */,
+				8EED1FEE29BDBF4600EBEC70 /* FindViewModel.swift in Sources */,
 				8EED1FE329BDAE5900EBEC70 /* FindView.swift in Sources */,
 				8EED1FD429BDA65900EBEC70 /* ContentView.swift in Sources */,
 				8EED1FD229BDA65900EBEC70 /* LikeThePhotoSwiftUIApp.swift in Sources */,
