@@ -9,9 +9,7 @@ import SwiftUI
 
 struct FavoritesView: View {
     @StateObject private var vm = FavoritesViewModel()
-
-//    let images = ["demo1", "demo2", "demo3", "demo4"]
-
+    
     private let grids = [
         GridItem(),
         GridItem(),
@@ -28,6 +26,7 @@ struct FavoritesView: View {
                             ForEach(vm.images, id: \.self) { image in
                                 NavigationLink {
                                     ImageFullScreenView(image: image)
+                                        .environmentObject(vm)
                                 } label: {
                                     ItemFavoritesImageView(image: image)
                                 }

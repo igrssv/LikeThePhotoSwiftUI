@@ -17,8 +17,8 @@ class CoreDataManager {
     init() {
         container = NSPersistentContainer(name: "LikeThePhoto")
         container.loadPersistentStores { (storeDescription, error) in
-            if let erorr = error {
-                fatalError("Unresolved error \(error?.localizedDescription)")
+            if error != nil {
+                print("Unresolved error \(String(describing: error?.localizedDescription))")
             }
         }
     }
@@ -27,10 +27,10 @@ class CoreDataManager {
         let request: NSFetchRequest<ImageEntity> = ImageEntity.fetchRequest()
         do {
             let result = try container.viewContext.fetch(request)
-            let images = result.compactMap{ UIImage(data: $0.image ?? Data())} // corrected
+            let images = result.compactMap{ UIImage(data: $0.image ?? Data())}
             return images
         } catch {
-            print("Error loading images: \(error)")
+            print("Error loading images: \(error.localizedDescription)")
         }
         return []
     }
@@ -46,7 +46,18 @@ class CoreDataManager {
         }
     }
     
-    func remove() {
-        
+    func remove(_ image: UIImage) {
+        let request: NSFetchRequest<ImageEntity> = ImageEntity.fetchRequest()
+        guard let dataImage = image.pngData() else { return }
+        request.predicate = NSPredicate(format: "image = %@", dataImage as NSData )
+        do {
+            let imageEntities = try container.viewContext.fetch(request)
+            for imageEntity in imageEntities {
+                container.viewContext.delete(imageEntity)
+            }
+            try container.viewContext.save()
+        } catch {
+            print("Error remove image: \(error.localizedDescription)")
+        }
     }
 }

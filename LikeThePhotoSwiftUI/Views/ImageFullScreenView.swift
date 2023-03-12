@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ImageFullScreenView: View {
+    @EnvironmentObject var vm: FavoritesViewModel
     let image: UIImage
     @State private var navigations = true
     @GestureState private var scale: CGFloat = 1
@@ -49,7 +50,7 @@ struct ImageFullScreenView: View {
                         }
                         Spacer()
                         Button {
-                            
+                            vm.remove(image)
                         } label: {
                             Image(systemName: "trash.fill")
                                 .foregroundColor(.red)

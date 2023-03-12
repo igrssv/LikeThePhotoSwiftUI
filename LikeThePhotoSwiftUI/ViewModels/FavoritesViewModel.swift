@@ -20,4 +20,9 @@ class FavoritesViewModel: ObservableObject {
     func loadImage() {
         images = coreDataManager.fetchData()
     }
+    
+    func remove(_ image: UIImage) {
+        coreDataManager.remove(image)
+        loadImage()
+    }
 }
