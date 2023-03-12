@@ -23,7 +23,6 @@ struct FindView: View {
             Text("LikeThePhoto")
                 .font(.largeTitle)
                 .bold()
-            Text("\(vm.imageModels.count)")
             if let index = vm.index {
                 ImageCardView(image: vm.images[index])
             } else {
@@ -31,7 +30,7 @@ struct FindView: View {
             }
             
             HStack() {
-                ButtonView(titel: "star", color: .green, action: {})
+                ButtonView(titel: "star", color: .green, action: vm.saveImage)
                 Spacer()
                 ShareLink(
                     item: shareImage(),

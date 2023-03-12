@@ -16,7 +16,7 @@ struct ImageCardView: View {
             ZStack {
                 Image(image ?? "plaseholderIMG")
                     .resizable()
-                    .frame(width: size.width * 0.9, height: size.height * 0.7)
+                    .frame(width: size.width * 0.9, height: size.height * 0.66)
                     .scaledToFit()
                     .blur(radius: image != nil ? 0 : 5)
                 if image == nil {

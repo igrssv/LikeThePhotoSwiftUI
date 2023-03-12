@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct LikeThePhotoSwiftUIApp: App {
+    private let context = CoreDataManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, context.container.viewContext)
         }
     }
 }

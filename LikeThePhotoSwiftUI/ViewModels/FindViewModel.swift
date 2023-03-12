@@ -17,6 +17,7 @@ class FindViewModel: ObservableObject {
     @Published var imageModels: [ImageModel] = []
     
     private var networkManager = NetworkManager.shared
+    private var coreDataManager = CoreDataManager.shared
     
     init() {
         fetchDemoImage()
@@ -24,7 +25,7 @@ class FindViewModel: ObservableObject {
     
     private func fetchDemoImage() {
         let images = ["demo1", "demo2", "demo3", "demo4"]
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             images.forEach { name in
                 self.images.append(name)
             }
@@ -38,5 +39,10 @@ class FindViewModel: ObservableObject {
         } else {
             index = nil
         }
+    }
+    
+    func saveImage() {
+        guard let currentIndex = index, let image = UIImage(named: images[currentIndex]) else { return }
+        coreDataManager.saveImage(image)
     }
 }
