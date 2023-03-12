@@ -9,17 +9,20 @@ import SwiftUI
 
 struct ImageFullScreenView: View {
     let image: UIImage
+    @State private var navigations = true
     @GestureState private var scale: CGFloat = 1
     
     private var magnificator: some Gesture {
         MagnificationGesture()
             .updating($scale) { current, gestureState, _ in
-                print(scale)
-                print(current)
                 gestureState = current
             }
     }
-    
+    private func showNavigation() {
+        withAnimation {
+            navigations.toggle()
+        }
+    }
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -29,33 +32,36 @@ struct ImageFullScreenView: View {
                     .scaledToFit()
                     .scaleEffect(scale)
                     .gesture(magnificator)
-                
-                HStack {
-                    ShareLink(
-                        item: Image(uiImage: image),
-                        preview: SharePreview(
-                            "LikeThePhoto",
-                            image: Image(uiImage: image)
-                        )
-                    ) {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.white)
-                            
-                            
+                    .onTapGesture {
+                        showNavigation()
                     }
-                    Spacer()
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "trash.fill")
-                            .foregroundColor(.red)
-                    }
+                if navigations {
+                    HStack {
+                        ShareLink(
+                            item: Image(uiImage: image),
+                            preview: SharePreview(
+                                "LikeThePhoto",
+                                image: Image(uiImage: image)
+                            )
+                        ) {
+                            Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "trash.fill")
+                                .foregroundColor(.red)
+                        }
 
+                    }
+                    .padding()
                 }
-                .padding()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(navigations ? .visible : .hidden)
     }
 }
 
