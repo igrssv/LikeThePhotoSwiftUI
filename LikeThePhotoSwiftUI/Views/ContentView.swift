@@ -16,7 +16,7 @@ struct ContentView: View {
                     Text("Find Image")
                 }
             
-            FindView()
+            FavoritesView()
                 .tabItem {
                     Image(systemName: "star")
                     Text("Favorites")
