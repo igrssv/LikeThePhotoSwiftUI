@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct ImageCardView: View {
-    let image: String?
+    let image: UIImage?
     private let size = UIScreen.main.bounds.size
+    
+    private func isImage() -> Image {
+        guard let image = image else {
+            return Image("plaseholderIMG")
+        }
+        return Image(uiImage: image)
+    }
     
     var body: some View {
         VStack {
             ZStack {
-                Image(image ?? "plaseholderIMG")
+                isImage()
                     .resizable()
                     .frame(width: size.width * 0.9, height: size.height * 0.66)
                     .scaledToFit()

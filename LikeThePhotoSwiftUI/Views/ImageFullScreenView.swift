@@ -25,40 +25,39 @@ struct ImageFullScreenView: View {
         }
     }
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            VStack {
+        ZStack(alignment: .bottom) {
+            ZStack {
+                Color.black.ignoresSafeArea()
                 Image(uiImage: image)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .scaleEffect(scale)
                     .gesture(magnificator)
                     .onTapGesture {
                         showNavigation()
                     }
-                if navigations {
-                    HStack {
-                        ShareLink(
-                            item: Image(uiImage: image),
-                            preview: SharePreview(
-                                "LikeThePhoto",
-                                image: Image(uiImage: image)
-                            )
-                        ) {
-                            Image(systemName: "square.and.arrow.up")
-                                .foregroundColor(.white)
-                        }
-                        Spacer()
-                        Button {
-                            vm.remove(image)
-                        } label: {
-                            Image(systemName: "trash.fill")
-                                .foregroundColor(.red)
-                        }
-
+            }
+            if navigations {
+                HStack {
+                    ShareLink(
+                        item: Image(uiImage: image),
+                        preview: SharePreview(
+                            "LikeThePhoto",
+                            image: Image(uiImage: image)
+                        )
+                    ) {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.white)
                     }
-                    .padding()
+                    Spacer()
+                    Button {
+                        vm.remove(image)
+                    } label: {
+                        Image(systemName: "trash.fill")
+                            .foregroundColor(.red)
+                    }
                 }
+                .padding()
             }
         }
         .navigationBarTitleDisplayMode(.inline)

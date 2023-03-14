@@ -9,13 +9,13 @@ import SwiftUI
 
 struct FindView: View {
     @StateObject private var vm = FindViewModel()
-    @State var image = Image("plaseholderIMG")
     
     private func shareImage() -> Image {
-        guard let currentIndex = vm.index else {
+        if vm.images.isEmpty {
             return Image("plaseholderIMG")
+        } else {
+            return Image(uiImage: vm.images[vm.index])
         }
-        return Image(vm.images[currentIndex])
     }
     
     var body: some View {
@@ -23,15 +23,16 @@ struct FindView: View {
             Text("LikeThePhoto")
                 .font(.largeTitle)
                 .bold()
-            if let index = vm.index {
-                ImageCardView(image: vm.images[index])
-            } else {
+            if vm.images.isEmpty {
                 ImageCardView(image: nil)
+            } else {
+                ImageCardView(image: vm.images[vm.index])
             }
             
             HStack() {
                 ButtonView(titel: "star", color: .green, action: vm.saveImage)
                 Spacer()
+                
                 ShareLink(
                     item: shareImage(),
                     preview: SharePreview(

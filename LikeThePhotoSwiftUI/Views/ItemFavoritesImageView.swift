@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ItemFavoritesImageView: View {
     let image: UIImage
-//    let image: String
     private let size = UIScreen.main.bounds.size
     
     var body: some View {
@@ -26,7 +25,5 @@ struct ItemFavoritesImageView: View {
 struct ItemFavoritesImageView_Previews: PreviewProvider {
     static var previews: some View {
         ItemFavoritesImageView(image: UIImage(named: "plaseholderIMG")!)
-//        ItemFavoritesImageView(image: "plaseholderIMG")
-
     }
 }

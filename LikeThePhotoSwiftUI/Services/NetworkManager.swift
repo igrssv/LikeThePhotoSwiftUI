@@ -10,59 +10,55 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private let url = "https://api.unsplash.com/photos/random?client_id="
     private let accessKey = ""
-    
+
     init() {}
     
-    func fetchImageModel(_ query: String, completion: @escaping([ImageModel]) -> Void) {
-        print("im fetch sttart")
-        var imageModels: [ImageModel] = []
-        var urlString = url + accessKey
-        if !query.isEmpty {
-            urlString += "&query=" + query
+    func fetchImages(_ category: String?, completion: @escaping([UIImage]?) -> Void) {
+        var url = "https://api.unsplash.com"
+        
+        if let category = category {
+            url = url + "/search/photos?query=" + category + "&per_page=10&client_id="
+        } else {
+            url += "/photos/random/?count=10&client_id="
         }
         
-        guard let url = URL(string: urlString) else {
+        guard let apiUrl = URL(string: url + accessKey) else {
+            completion(nil)
             return
         }
-        for _ in 0...1 {
-            URLSession.shared.dataTask(with: url) { data, _, error in
-                guard let data = data, error == nil else {
-                    print("Error fetchig image model: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                
-                if let decodeImage = try? JSONDecoder().decode(ImageModel.self, from: data) {
-                    DispatchQueue.main.async {
-                        print("add")
-                        imageModels.append(decodeImage)
-                    }
-                }
-                
-            }.resume()
-        }
-        completion(imageModels)
         
-    }
-    
-    func fetchImage(_ url: URL) -> UIImage? {
-        var image: UIImage?
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                print("Error fetchig image: \(String(describing: error?.localizedDescription))")
-                
+        URLSession.shared.dataTask(with: apiUrl) { data, _, error in
+            
+            guard error == nil else {
+                print("error : \(String(describing: error?.localizedDescription))")
+                completion(nil)
                 return
             }
             
-            if let fetchImage = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    image = fetchImage
+            guard let data = data else {
+                print("no data")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode([ImageModel].self, from: data)
+                var images: [UIImage] = []
+                
+                for result in results {
+                    if let imageUrl = URL(string: result.urls.regular),
+                       let imageData = try? Data(contentsOf: imageUrl),
+                       let image = UIImage(data: imageData) {
+                        images.append(image)
+                    }
                 }
+                
+                completion(images)
+                
+            } catch {
+                print("error decode: \(error.localizedDescription)")
             }
         }.resume()
-        
-        return image
     }
 }

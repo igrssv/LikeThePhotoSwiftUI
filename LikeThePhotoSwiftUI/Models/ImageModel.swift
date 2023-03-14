@@ -12,6 +12,6 @@ struct ImageModel: Codable {
     let urls: URLs
     
     struct URLs: Codable {
-        let regular: URL
+        let regular: String
     }
 }
